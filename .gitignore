@@ -1,0 +1,11 @@
+config.py
+creds.json
+.env
+guilds.db
+linked_test.json
+linked.json
+*.log
+.venv
+.vscode
+__pycache__
+.pytest_cache
