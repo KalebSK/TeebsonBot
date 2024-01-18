@@ -1,7 +1,6 @@
 from pytest_mock import MockerFixture
 from sqlalchemy import text
 import pytest
-import api
 import googleauth
 import json
 import time
@@ -15,7 +14,6 @@ def reset_database(con):
 @pytest.mark.asyncio
 async def test_get_auth_url(mocker):
     try:
-        mocker.patch.object(googleauth, 'engine', api.engine)
         mocker.patch.object(googleauth, 'LINKED_FILE', 'linked_test.json')
         con = googleauth.get_connection()
         test_ga = googleauth.GoogeAuthConnect()
@@ -44,7 +42,6 @@ async def test_get_auth_url(mocker):
 @pytest.mark.asyncio
 async def test_get_credentials_valid(mocker: MockerFixture):
     try:
-        mocker.patch.object(googleauth, 'engine', api.engine)
         mocker.patch.object(googleauth, 'LINKED_FILE', 'linked_test.json')
         con = googleauth.get_connection()
         test_ga = googleauth.GoogeAuthConnect()
@@ -81,7 +78,6 @@ async def test_get_credentials_valid(mocker: MockerFixture):
 @pytest.mark.asyncio
 async def test_polling(mocker: MockerFixture):
     try:
-        mocker.patch.object(googleauth, 'engine', api.engine)
         mocker.patch.object(googleauth, 'LINKED_FILE', 'linked_test.json')
         mocker.patch.object(googleauth, 'POLLING_INTERVAL', 0.1)
         con = googleauth.get_connection()

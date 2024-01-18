@@ -1,20 +1,19 @@
-import sys
 import discord
 from discord.ext import commands
-import dotenv
 import os
-import googleauth
 import logging
 import asyncio
 from logging.handlers import RotatingFileHandler
 from termcolor import colored, cprint
+import googleauth
 
 intents = discord.Intents.default()
 intents.message_content = True
 global google_auth
-dotenv.load_dotenv()
+
 from googleapiclient.discovery import build, MutualTLSChannelError
 from google.oauth2.credentials import Credentials
+
 
 # setup logging
 grey = "\x1b[38;20m"
@@ -243,7 +242,7 @@ async def on_ready():
  |_____/ |    \\_ .  |    |______ |______ |_____] ______| |_____| |  \\_|
 ''', 'light_blue'))
     print(f'We have logged in as {colored(bot.user, 'light_magenta')}')
-    google_auth = googleauth.GoogeAuthConnect()
+    google_auth = googleauth.GoogeAuthConnect(api_prefix=os.getenv('API_PREFIX'))
     print(colored(f'google auth initialized', 'light_yellow'))
 
 
@@ -414,6 +413,5 @@ async def on_scheduled_event_user_remove(event, user):
             print(err)
         except Exception as err:
             raise err
-
-
+        
 bot.run(os.getenv('DISCORD_TOKEN'), log_handler=None)

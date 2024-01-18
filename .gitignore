@@ -9,3 +9,5 @@ linked.json
 .vscode
 __pycache__
 .pytest_cache
+TeebsonBot.code-workspace
+pytest.ini

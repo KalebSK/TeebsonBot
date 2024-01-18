@@ -1,0 +1,1 @@
+Class that tracks and polls for authenticated guilds in the database

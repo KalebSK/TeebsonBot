@@ -1,5 +1,4 @@
 import json
-import config
 import os
 import asyncio
 import time
@@ -10,10 +9,7 @@ POLLING_INTERVAL = 5
 BATCH_SIZE = 10
 EXPIRATION_TIME = 500
 LINKED_FILE = 'linked.json'
-DATABASE_FILE = 'sqlite:///guilds.db'
-
-engine = create_engine(DATABASE_FILE, pool_recycle=3600, echo=True)
-
+engine = create_engine(os.environ.get('DATABASE_URL', 'sqlite:///database/guilds.db'), pool_recycle=3600, echo=True)
 
 def get_connection():
     """ gets a connection to the database
@@ -25,12 +21,12 @@ def get_connection():
 
 class GoogeAuthConnect:
 
-    def __init__(self):
+    def __init__(self, api_prefix='http://localhost:5000/'):
         """ initializes the GoogleAuthConnect class
         """
         self.active_sign_ins = {}
         self.linked = {}
-
+        self.api_prefix = api_prefix
         if os.path.exists(LINKED_FILE):
             with open(LINKED_FILE, 'r') as f:
                 try:
@@ -132,7 +128,7 @@ class GoogeAuthConnect:
             'state': state
         }
         con.close()
-        return f'{config.AUTH_SERVER_PREFIX}authorize/{guild_id}/{state}'
+        return f'{self.api_prefix}authorize/{guild_id}/{state}'
 
     async def get_linked_credentials(self, guild_id: str):
         return self.linked.get(guild_id)

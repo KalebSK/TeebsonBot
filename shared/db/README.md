@@ -1,0 +1,1 @@
+creates an SQLAlchemy database engine and provides the ability to connect to a database in a flask app

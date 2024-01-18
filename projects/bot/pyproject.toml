@@ -1,0 +1,20 @@
+[tool.poetry]
+name = "bot"
+version = "0.1.0"
+description = "The DrTeebson discord bot to add Google Calendar integration to a discord guild"
+authors = ["keeb12 <kalebkoebelgd@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+discord = "^2.3.2"
+python-dotenv = "^1.0.0"
+asyncio = "^3.4.3"
+termcolor = "^2.4.0"
+google-api-python-client = "^2.111.0"
+SQLAlchemy = "^2.0.23"
+googleauth = {path = "../../shared/googleauth"}
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
